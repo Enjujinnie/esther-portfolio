@@ -1,0 +1,1698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Esther Njuguna — Software Engineer & Web Designer based in Kenya. Building elegant, functional digital experiences.">
+    <title>Esther Njuguna | Software Engineer & Web Designer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #0A1628;
+            --bg-elevated: #0F1E36;
+            --card: #131E33;
+            --card-hover: #1A2744;
+            --border: #1F2E4A;
+            --border-strong: #2A3B5C;
+            --gold: #D4A34A;
+            --gold-light: #E8C476;
+            --gold-dim: #A88338;
+            --text: #E8ECEF;
+            --text-muted: #8892A6;
+            --text-dim: #5A6478;
+            --success: #4ADE80;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            font-weight: 400;
+        }
+
+        ::selection { background: var(--gold); color: var(--bg); }
+
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: var(--bg); }
+        ::-webkit-scrollbar-thumb {
+            background: var(--border-strong);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover { background: var(--gold-dim); }
+
+        .grid-bg {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image:
+                linear-gradient(rgba(212, 163, 74, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(212, 163, 74, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.25rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(10, 22, 40, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            border-bottom-color: var(--border);
+            padding: 1rem 5%;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--text);
+            text-decoration: none;
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-mark {
+            width: 32px;
+            height: 32px;
+            background: var(--gold);
+            color: var(--bg);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover { color: var(--text); }
+        .nav-links a:hover::after { width: 100%; }
+
+        .nav-cta {
+            padding: 0.6rem 1.25rem;
+            background: transparent;
+            color: var(--gold);
+            border: 1px solid var(--gold);
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .nav-cta:hover {
+            background: var(--gold);
+            color: var(--bg);
+        }
+
+        .menu-toggle {
+            display: none;
+            background: transparent;
+            border: none;
+            color: var(--text);
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 8rem 5% 4rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 20%; right: 10%;
+            width: 400px; height: 400px;
+            background: radial-gradient(circle, rgba(212, 163, 74, 0.15) 0%, transparent 70%);
+            filter: blur(60px);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .hero-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 5rem;
+            align-items: center;
+            width: 100%;
+        }
+
+        .hero-greeting {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--gold);
+            margin-bottom: 1.25rem;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .hero-greeting::before {
+            content: '';
+            width: 30px;
+            height: 1px;
+            background: var(--gold);
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.75rem, 6vw, 4.75rem);
+            line-height: 1.05;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: var(--text);
+            letter-spacing: -1px;
+        }
+
+        .hero-title .accent {
+            color: var(--gold);
+            font-style: italic;
+        }
+
+        .hero-role {
+            font-size: 1.4rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+        }
+
+        .hero-role strong { color: var(--text); font-weight: 500; }
+
+        .hero-subtitle {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+            max-width: 520px;
+            line-height: 1.7;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.95rem 1.75rem;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            border: 1px solid transparent;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .btn-primary {
+            background: var(--gold);
+            color: var(--bg);
+        }
+
+        .btn-primary:hover {
+            background: var(--gold-light);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(212, 163, 74, 0.25);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text);
+            border-color: var(--border-strong);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+
+        .hero-image-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 420px;
+            margin: 0 auto;
+        }
+
+        .hero-image-wrapper::before {
+            content: '';
+            position: absolute;
+            top: -16px; left: -16px;
+            right: 16px; bottom: 16px;
+            border: 1.5px solid var(--gold);
+            border-radius: 16px;
+            z-index: 0;
+        }
+
+        .hero-image {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 4/5;
+            border-radius: 16px;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--card) 0%, var(--bg-elevated) 100%);
+            border: 1px solid var(--border-strong);
+            z-index: 1;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 20%;
+        }
+
+        .status-badge {
+            position: absolute;
+            bottom: 24px; left: -20px;
+            background: var(--card);
+            border: 1px solid var(--border-strong);
+            padding: 1rem 1.25rem;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            z-index: 2;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--success);
+            box-shadow: 0 0 12px var(--success);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .status-text { font-size: 0.85rem; }
+        .status-text strong { display: block; color: var(--text); }
+        .status-text span { color: var(--text-muted); font-size: 0.75rem; }
+
+        /* Sections */
+        section { position: relative; z-index: 1; }
+
+        .section-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 6rem 5%;
+        }
+
+        .section-header {
+            margin-bottom: 4rem;
+        }
+
+        .section-tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--gold);
+            letter-spacing: 1.5px;
+            font-weight: 500;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-tag::before {
+            content: '';
+            width: 24px;
+            height: 1px;
+            background: var(--gold);
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: var(--text);
+            font-weight: 600;
+            letter-spacing: -0.5px;
+            max-width: 700px;
+        }
+
+        .section-title .accent { color: var(--gold); font-style: italic; }
+
+        /* About */
+        .about {
+            background: var(--bg-elevated);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1.3fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .about-text p {
+            color: var(--text-muted);
+            margin-bottom: 1.25rem;
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        .about-text p strong { color: var(--text); font-weight: 500; }
+
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin-top: 2rem;
+        }
+
+        .skill-tag {
+            padding: 0.5rem 1rem;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-family: 'JetBrains Mono', monospace;
+            transition: all 0.25s ease;
+        }
+
+        .skill-tag:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+            transform: translateY(-2px);
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .stat-card {
+            padding: 1.75rem 1.5rem;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-3px);
+        }
+
+        .stat-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--gold);
+            font-weight: 600;
+            line-height: 1;
+        }
+
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Projects filter */
+        .filter-bar {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 2.5rem;
+            justify-content: center;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1.15rem;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            font-family: 'JetBrains Mono', monospace;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .filter-btn:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+
+        .filter-btn.active {
+            background: var(--gold);
+            color: var(--bg);
+            border-color: var(--gold);
+        }
+
+        /* Projects grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .project-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            overflow: hidden;
+            transition: all 0.35s ease;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 2px;
+            background: var(--gold);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+            z-index: 3;
+        }
+
+        .project-card:hover {
+            border-color: var(--border-strong);
+            transform: translateY(-4px);
+            background: var(--card-hover);
+        }
+
+        .project-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .project-card.hidden {
+            display: none;
+        }
+
+        .project-visual {
+            height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .project-visual.viz-1 { background: linear-gradient(135deg, #1a2744 0%, #0f1e36 100%); }
+        .project-visual.viz-2 { background: linear-gradient(135deg, #1e2a3d 0%, #0a1628 100%); }
+        .project-visual.viz-3 { background: linear-gradient(135deg, #16223a 0%, #1a2b4a 100%); }
+        .project-visual.viz-4 { background: linear-gradient(135deg, #1a1f35 0%, #0f1a2e 100%); }
+        .project-visual.viz-5 { background: linear-gradient(135deg, #1c2540 0%, #131e33 100%); }
+        .project-visual.viz-6 { background: linear-gradient(135deg, #18213a 0%, #1e2a45 100%); }
+        .project-visual.viz-7 { background: linear-gradient(135deg, #131e33 0%, #0f1e36 100%); }
+        .project-visual.viz-8 { background: linear-gradient(135deg, #1a1f35 0%, #131e33 100%); }
+
+        .project-icon {
+            font-size: 3.2rem;
+        }
+
+        .project-badge-tl {
+            position: absolute;
+            top: 12px; left: 12px;
+            padding: 0.25rem 0.6rem;
+            background: rgba(10, 22, 40, 0.85);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            font-size: 0.7rem;
+            color: var(--gold);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .project-content {
+            padding: 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-category {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--gold);
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+
+        .project-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            color: var(--text);
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        .project-description {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.65;
+            margin-bottom: 1.25rem;
+            flex: 1;
+        }
+
+        .project-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .project-tags {
+            display: flex;
+            gap: 0.4rem;
+            flex-wrap: wrap;
+        }
+
+        .project-tag {
+            font-size: 0.7rem;
+            color: var(--text-dim);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .project-tag + .project-tag::before {
+            content: '·';
+            margin-right: 0.4rem;
+            color: var(--border-strong);
+        }
+
+        .project-link {
+            color: var(--gold);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            transition: gap 0.3s ease;
+        }
+
+        .project-link:hover { gap: 0.6rem; }
+
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(10, 22, 40, 0.85);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal {
+            background: var(--card);
+            border: 1px solid var(--border-strong);
+            border-radius: 16px;
+            max-width: 720px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 0;
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .modal-overlay.active .modal {
+            transform: scale(1);
+        }
+
+        .modal-header {
+            padding: 2rem 2rem 1rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .modal-close {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            width: 36px; height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.25s ease;
+            flex-shrink: 0;
+        }
+
+        .modal-close:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+
+        .modal-category {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--gold);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--text);
+            font-weight: 600;
+            letter-spacing: -0.5px;
+        }
+
+        .modal-body {
+            padding: 1.5rem 2rem 2rem;
+        }
+
+        .modal-description {
+            color: var(--text-muted);
+            font-size: 1rem;
+            line-height: 1.75;
+            margin-bottom: 1.75rem;
+        }
+
+        .modal-section-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--gold);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .modal-section-title::before {
+            content: '';
+            width: 20px;
+            height: 1px;
+            background: var(--gold);
+        }
+
+        .modal-features {
+            list-style: none;
+            margin-bottom: 1.75rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+        }
+
+        .modal-features li {
+            padding: 0.6rem 0;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .modal-features li::before {
+            content: '✓';
+            color: var(--gold);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .modal-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.75rem;
+        }
+
+        .modal-stack span {
+            padding: 0.4rem 0.85rem;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 0.75rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
+            flex-wrap: wrap;
+        }
+
+        /* Contact */
+        .contact {
+            background: var(--bg);
+            text-align: center;
+        }
+
+        .contact .section-container { padding: 8rem 5%; }
+        .contact .section-tag { justify-content: center; }
+        .contact .section-tag::before { display: none; }
+        .contact .section-title { margin: 0 auto 1.5rem; }
+
+        .contact-text {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            max-width: 560px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.7;
+        }
+
+        .contact-methods {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+        }
+
+        .contact-method {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1.5rem 2rem;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            text-decoration: none;
+            color: var(--text);
+            transition: all 0.3s ease;
+            min-width: 220px;
+        }
+
+        .contact-method:hover {
+            border-color: var(--gold);
+            transform: translateY(-4px);
+        }
+
+        .contact-method-icon {
+            font-size: 1.5rem;
+            color: var(--gold);
+            margin-bottom: 0.25rem;
+        }
+
+        .contact-method-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--text-dim);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .contact-method-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            color: var(--gold);
+            font-style: italic;
+            word-break: break-all;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .social-link {
+            width: 48px;
+            height: 48px;
+            border: 1px solid var(--border-strong);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: var(--gold);
+            border-color: var(--gold);
+            color: var(--bg);
+            transform: translateY(-3px);
+        }
+
+        .social-link svg { width: 20px; height: 20px; }
+
+        /* Footer */
+        footer {
+            padding: 2rem 5%;
+            background: var(--bg);
+            border-top: 1px solid var(--border);
+            text-align: center;
+            color: var(--text-dim);
+            font-size: 0.85rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        footer .accent { color: var(--gold); }
+
+        .fade-up {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .hero { padding: 7rem 5% 3rem; }
+            .hero-container { grid-template-columns: 1fr; gap: 3rem; }
+            .hero-content { order: 2; text-align: center; }
+            .hero-image-wrapper { order: 1; max-width: 300px; }
+            .hero-greeting { justify-content: center; }
+            .hero-cta { justify-content: center; }
+            .hero-subtitle { margin-left: auto; margin-right: auto; }
+            .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+            .nav-links { display: none; }
+            .menu-toggle { display: block; }
+            .status-badge { left: 10px; bottom: 10px; }
+            .modal-features { grid-template-columns: 1fr; }
+            .modal-header, .modal-body { padding-left: 1.5rem; padding-right: 1.5rem; }
+        }
+
+        @media (max-width: 600px) {
+            .stats { grid-template-columns: 1fr; }
+            .section-container { padding: 4rem 5%; }
+            .contact-method { min-width: 180px; padding: 1.25rem 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="grid-bg"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <a href="#" class="logo">
+            <span class="logo-mark">E</span>
+            Esther Njuguna
+        </a>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#work">Work</a></li>
+            <li><a href="#contact" class="nav-cta">Get in Touch</a></li>
+        </ul>
+        <button class="menu-toggle" aria-label="Menu" onclick="toggleMobileMenu()">☰</button>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <p class="hero-greeting">HELLO, I'M</p>
+                <h1 class="hero-title">
+                    Esther
+                    <span class="accent">Njuguna.</span>
+                </h1>
+                <p class="hero-role">
+                    <strong>Software Engineer</strong> &amp;
+                    <strong>Web Designer</strong>
+                </p>
+                <p class="hero-subtitle">
+                    Computer Science graduate from Karatina University, specializing in creating
+                    elegant, functional digital experiences that bridge technology and design.
+                </p>
+                <div class="hero-cta">
+                    <a href="#work" class="btn btn-primary">
+                        View My Work
+                        <span>→</span>
+                    </a>
+                    <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+                </div>
+            </div>
+
+            <div class="hero-image-wrapper">
+                <div class="hero-image">
+                    <img src="assets/esther.jpg" alt="Esther Njuguna">
+                </div>
+                <div class="status-badge">
+                    <div class="status-dot"></div>
+                    <div class="status-text">
+                        <strong>Available for work</strong>
+                        <span>Based in Kenya</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section class="about" id="about">
+        <div class="section-container">
+            <div class="section-header fade-up">
+                <p class="section-tag">01 / ABOUT</p>
+                <h2 class="section-title">
+                    Passionate about <span class="accent">code &amp; design</span>.
+                </h2>
+            </div>
+
+            <div class="about-grid">
+                <div class="about-text fade-up">
+                    <p>
+                        I'm a <strong>Software Engineer and Web Designer</strong> based in Kenya,
+                        with a strong foundation in Computer Science from Karatina University.
+                        My journey in tech is driven by a simple belief: the best digital products
+                        are those that seamlessly blend robust functionality with intuitive,
+                        beautiful design.
+                    </p>
+                    <p>
+                        From developing complex <strong>medical diagnosis systems</strong> and
+                        <strong>machine learning models</strong> to crafting immersive
+                        <strong>e-commerce experiences</strong>, I approach every project with
+                        meticulous attention to detail and a commitment to excellence. My work
+                        spans full-stack web development, mobile-responsive design, cloud
+                        infrastructure, and applied AI.
+                    </p>
+
+                    <div class="skills-grid">
+                        <span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">React</span>
+                        <span class="skill-tag">Node.js</span>
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">Spring Boot</span>
+                        <span class="skill-tag">Flask</span>
+                        <span class="skill-tag">TensorFlow</span>
+                        <span class="skill-tag">Socket.io</span>
+                        <span class="skill-tag">UI / UX Design</span>
+                        <span class="skill-tag">Webflow</span>
+                        <span class="skill-tag">Cloud Hosting</span>
+                        <span class="skill-tag">PostgreSQL</span>
+                    </div>
+                </div>
+
+                <div class="stats fade-up">
+                    <div class="stat-card">
+                        <div class="stat-number">16+</div>
+                        <div class="stat-label">Projects Completed</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">3+</div>
+                        <div class="stat-label">Years Experience</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">100%</div>
+                        <div class="stat-label">Commitment</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">∞</div>
+                        <div class="stat-label">Creativity</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Work -->
+    <section id="work">
+        <div class="section-container">
+            <div class="section-header fade-up">
+                <p class="section-tag">02 / SELECTED WORK</p>
+                <h2 class="section-title">
+                    A portfolio of <span class="accent">craft &amp; care</span>.
+                </h2>
+            </div>
+
+            <div class="filter-bar fade-up">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="web">Web Dev</button>
+                <button class="filter-btn" data-filter="fullstack">Full-Stack</button>
+                <button class="filter-btn" data-filter="ai">AI / ML</button>
+                <button class="filter-btn" data-filter="design">Design</button>
+                <button class="filter-btn" data-filter="cloud">Cloud</button>
+            </div>
+
+            <div class="projects-grid" id="projectsGrid">
+                <!-- Cards populated by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="contact" id="contact">
+        <div class="section-container">
+            <p class="section-tag fade-up">03 / GET IN TOUCH</p>
+            <h2 class="section-title fade-up" style="margin-left: auto; margin-right: auto;">
+                Let's work <span class="accent">together</span>.
+            </h2>
+            <p class="contact-text fade-up">
+                Have a project in mind? I'm always open to discussing new opportunities,
+                creative ideas, or ways to help bring your vision to life.
+            </p>
+
+            <div class="contact-methods fade-up">
+                <a href="mailto:enjuesther@gmail.com" class="contact-method">
+                    <span class="contact-method-icon">✉</span>
+                    <span class="contact-method-label">EMAIL</span>
+                    <span class="contact-method-value">enjuesther@gmail.com</span>
+                </a>
+                <a href="tel:+254113537811" class="contact-method">
+                    <span class="contact-method-icon">☎</span>
+                    <span class="contact-method-label">PHONE</span>
+                    <span class="contact-method-value">+254 113 537 811</span>
+                </a>
+                <a href="https://wa.me/254113537811" target="_blank" rel="noopener" class="contact-method">
+                    <span class="contact-method-icon">💬</span>
+                    <span class="contact-method-label">WHATSAPP</span>
+                    <span class="contact-method-value">Message me</span>
+                </a>
+            </div>
+
+            <div class="social-links fade-up">
+                <a href="https://linkedin.com/in/estherenjuguna" target="_blank" rel="noopener" class="social-link" aria-label="LinkedIn">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"/></svg>
+                </a>
+                <a href="https://github.com/estherenjuguna" target="_blank" rel="noopener" class="social-link" aria-label="GitHub">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.5.5.09.68-.22.68-.48 0-.24-.01-.87-.01-1.71-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85 0 1.34-.01 2.42-.01 2.75 0 .27.18.58.69.48A10.019 10.019 0 0022 12c0-5.52-4.48-10-10-10z"/></svg>
+                </a>
+                <a href="mailto:enjuesther@gmail.com" class="social-link" aria-label="Email">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                </a>
+                <a href="https://twitter.com/estherenjuguna" target="_blank" rel="noopener" class="social-link" aria-label="Twitter">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 01-1.93.07 4.28 4.28 0 004 2.98 8.521 8.521 0 01-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z"/></svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 <span class="accent">Esther Njuguna</span> · Crafted with passion in Kenya 🇰🇪</p>
+    </footer>
+
+    <!-- Project Modal -->
+    <div class="modal-overlay" id="modalOverlay" onclick="closeModalIfOverlay(event)">
+        <div class="modal" id="modalBox">
+            <div class="modal-header">
+                <div>
+                    <div class="modal-category" id="modalCategory">CATEGORY</div>
+                    <h3 class="modal-title" id="modalTitle">Title</h3>
+                </div>
+                <button class="modal-close" onclick="closeModal()" aria-label="Close">×</button>
+            </div>
+            <div class="modal-body">
+                <p class="modal-description" id="modalDescription"></p>
+
+                <div class="modal-section-title">KEY FEATURES</div>
+                <ul class="modal-features" id="modalFeatures"></ul>
+
+                <div class="modal-section-title">TECH STACK</div>
+                <div class="modal-stack" id="modalStack"></div>
+
+                <div class="modal-actions">
+                    <a href="#contact" onclick="closeModal()" class="btn btn-primary">
+                        Discuss This Project →
+                    </a>
+                    <a href="#contact" onclick="closeModal()" class="btn btn-secondary">Request Live Demo</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ===== PROJECT DATA =====
+        const projects = [
+            {
+                id: 'expense-tracker',
+                title: 'Income &amp; Expense Tracker',
+                category: 'FULL-STACK / FINTECH',
+                filter: 'fullstack',
+                badge: 'FEATURED',
+                icon: '💰',
+                viz: 'viz-1',
+                shortDesc: 'A full-stack personal finance web app with authentication, dashboards, category budgets, interactive charts, and dark mode. Track income &amp; expenses with real-time analytics.',
+                fullDesc: 'A comprehensive personal finance web application that helps users take full control of their money. Built with a secure Flask backend, SQLAlchemy ORM, and a polished Bootstrap 5 frontend with Chart.js visualizations. Users can register, log income and expenses across custom categories, filter transactions by date and description, view monthly spending trends, and toggle between light and dark themes — all in a responsive, mobile-friendly interface.',
+                features: [
+                    'Secure user auth with hashed passwords',
+                    'Custom spending categories with emoji icons',
+                    'Interactive Chart.js dashboards',
+                    'Filter by search, category, date range',
+                    '6-month income vs spending trend',
+                    'Dark mode with persistence',
+                    'CSRF protection on every form',
+                    'Per-user data isolation'
+                ],
+                stack: ['Flask', 'SQLAlchemy', 'Chart.js', 'Bootstrap 5', 'Flask-Login', 'Flask-WTF', 'SQLite', 'PostgreSQL']
+            },
+            {
+                id: 'medical-diagnosis',
+                title: 'Medical Diagnosis System',
+                category: 'HEALTHCARE TECHNOLOGY',
+                filter: 'ai',
+                badge: 'HEALTHCARE',
+                icon: '🏥',
+                viz: 'viz-1',
+                shortDesc: 'An intelligent healthcare platform assisting medical professionals with diagnostic processes, secure patient data management, and intuitive interfaces.',
+                fullDesc: 'A clinical decision support system designed to assist healthcare professionals with early diagnosis and patient triage. Combines a machine-learning symptom classifier with a secure patient management dashboard. Includes HIPAA-conscious data handling, audit logs, and role-based access for doctors, nurses, and administrators.',
+                features: [
+                    'Symptom-based ML diagnosis suggestions',
+                    'Encrypted patient record storage',
+                    'Role-based access control',
+                    'Audit logs for compliance',
+                    'Appointment scheduling',
+                    'Prescription management',
+                    'Print-ready medical reports',
+                    'Multi-user clinician support'
+                ],
+                stack: ['Python', 'Flask', 'scikit-learn', 'PostgreSQL', 'React', 'Tailwind CSS']
+            },
+            {
+                id: 'crop-disease',
+                title: 'Crop Disease Prediction',
+                category: 'AI / AGRICULTURAL TECH',
+                filter: 'ai',
+                badge: 'ML',
+                icon: '🌾',
+                viz: 'viz-4',
+                shortDesc: 'A deep-learning image classifier that identifies crop diseases from a leaf photo. Trained on the PlantVillage dataset and deployed as a mobile-friendly web tool for Kenyan farmers.',
+                fullDesc: 'A computer-vision web application that empowers smallholder farmers to identify crop diseases early. Users upload or capture a leaf photo, and a fine-tuned convolutional neural network (MobileNetV2 transfer learning) returns the predicted disease, confidence score, and recommended treatment. Designed with a mobile-first UI and offline-capable image capture for use in rural areas with limited connectivity.',
+                features: [
+                    'Deep learning image classification',
+                    'MobileNet transfer learning architecture',
+                    '30+ disease classes across major crops',
+                    'Confidence scores per prediction',
+                    'Treatment recommendations',
+                    'Mobile camera capture',
+                    'Offline-capable interface',
+                    'Swahili &amp; English UI'
+                ],
+                stack: ['TensorFlow', 'Keras', 'Python', 'Flask', 'JavaScript', 'PWA']
+            },
+            {
+                id: 'barber-salon',
+                title: 'Modern Barber Salon Design',
+                category: 'E-COMMERCE &amp; DESIGN',
+                filter: 'design',
+                badge: 'DESIGN',
+                icon: '✂️',
+                viz: 'viz-2',
+                shortDesc: 'A sleek, contemporary web platform for a premium barbershop, featuring online booking, service catalogs, and a sophisticated visual identity.',
+                fullDesc: 'A digital storefront for a high-end urban barbershop, designed from brand identity through to a fully functional booking system. The site guides clients through service selection, barber choice, and time-slot booking, with automated SMS confirmations and a loyalty rewards system.',
+                features: [
+                    'Live availability calendar',
+                    'Barber-specific booking',
+                    'SMS confirmation &amp; reminders',
+                    'Loyalty points system',
+                    'Service pricing catalog',
+                    'Customer review system',
+                    'Admin scheduling dashboard',
+                    'Mobile-first responsive UI'
+                ],
+                stack: ['React', 'Node.js', 'Express', 'MongoDB', 'Twilio API', 'Tailwind CSS']
+            },
+            {
+                id: 'shopping-site',
+                title: 'All-in-One Shopping Site',
+                category: 'FULL-STACK DEVELOPMENT',
+                filter: 'fullstack',
+                badge: 'E-COMMERCE',
+                icon: '🛒',
+                viz: 'viz-3',
+                shortDesc: 'A comprehensive e-commerce platform with integrated payment systems, inventory management, and personalized user experiences.',
+                fullDesc: 'A full-featured e-commerce platform supporting multiple vendors, integrated M-Pesa and card payments, inventory management, personalized recommendations, and a full admin dashboard with sales analytics. Built to handle high traffic with a scalable microservices approach.',
+                features: [
+                    'Multi-vendor marketplace',
+                    'M-Pesa &amp; card payment integration',
+                    'Real-time inventory tracking',
+                    'Personalized product recommendations',
+                    'Wishlist &amp; save-for-later',
+                    'Order tracking system',
+                    'Admin sales analytics',
+                    'Rating &amp; review system'
+                ],
+                stack: ['Next.js', 'Node.js', 'PostgreSQL', 'Stripe', 'M-Pesa API', 'Redis']
+            },
+            {
+                id: 'cloud-desktops',
+                title: 'Cloud Desktops &amp; Hosting',
+                category: 'CLOUD SOLUTIONS',
+                filter: 'cloud',
+                badge: 'INFRA',
+                icon: '☁️',
+                viz: 'viz-4',
+                shortDesc: 'A scalable cloud infrastructure platform providing virtual desktop solutions and seamless application hosting for modern businesses.',
+                fullDesc: 'A cloud infrastructure management platform allowing businesses to provision virtual desktops, host web applications, and manage cloud resources through an intuitive dashboard. Supports auto-scaling, load balancing, and one-click deployment.',
+                features: [
+                    'Virtual desktop provisioning',
+                    'One-click app deployment',
+                    'Auto-scaling infrastructure',
+                    'Load balancing across regions',
+                    'Real-time resource monitoring',
+                    'Cost management dashboard',
+                    'Automated backups',
+                    'Multi-region support'
+                ],
+                stack: ['AWS', 'Docker', 'Kubernetes', 'Terraform', 'React', 'Node.js']
+            },
+            {
+                id: 'webflow-platform',
+                title: 'Webflow Platform Design',
+                category: 'PLATFORM DESIGN',
+                filter: 'design',
+                badge: 'NO-CODE',
+                icon: '🎨',
+                viz: 'viz-5',
+                shortDesc: 'Custom Webflow development showcasing advanced no-code solutions with dynamic animations, CMS integration, and responsive design systems.',
+                fullDesc: 'A collection of custom Webflow projects showcasing what\'s possible with the no-code platform. Features complex CMS integrations, custom animations, interactive components, and reusable design systems built for scalability.',
+                features: [
+                    'Custom CMS collections',
+                    'Advanced GSAP animations',
+                    'Reusable component library',
+                    'Multi-language support',
+                    'SEO-optimized structure',
+                    'Interactive scroll effects',
+                    'Custom form validation',
+                    'Membership integration'
+                ],
+                stack: ['Webflow', 'JavaScript', 'GSAP', 'CMS API', 'Zapier']
+            },
+            {
+                id: 'spring-chinamama',
+                title: 'Spring by Chinamama',
+                category: 'BRAND IDENTITY',
+                filter: 'design',
+                badge: 'FASHION',
+                icon: '🌸',
+                viz: 'viz-6',
+                shortDesc: 'An elegant e-commerce website for a boutique fashion brand, emphasizing visual storytelling and seamless shopping experiences.',
+                fullDesc: 'A curated e-commerce experience for a Kenyan boutique fashion brand. The design emphasizes editorial photography, brand storytelling, and a checkout flow optimized for conversion. Custom illustrations and animations elevate the shopping experience beyond typical stores.',
+                features: [
+                    'Editorial-style product presentation',
+                    'Streamlined checkout flow',
+                    'Custom brand illustrations',
+                    'Social media integration',
+                    'Newsletter signup automation',
+                    'Product recommendation engine',
+                    'Size guide with model photos',
+                    'Wishlist &amp; favorites'
+                ],
+                stack: ['Shopify', 'Liquid', 'JavaScript', 'CSS', 'Figma']
+            },
+            {
+                id: 'flyventure',
+                title: 'flyVENTURE Helicopter Tours',
+                category: 'TOURISM &amp; HOSPITALITY',
+                filter: 'web',
+                badge: 'LUXURY',
+                icon: '🚁',
+                viz: 'viz-7',
+                shortDesc: 'A breathtaking website for luxury helicopter tours featuring immersive visuals, booking integration, and an exclusive icon set design.',
+                fullDesc: 'A high-end tourism website designed to sell aspiration. Features full-bleed video backgrounds, custom-designed helicopter route maps, real-time availability, and a booking system integrated with pilot schedules. The custom icon set was hand-drawn in Figma to match the luxurious brand voice.',
+                features: [
+                    'Cinematic video backgrounds',
+                    'Interactive route maps',
+                    'Real-time pilot availability',
+                    'Custom icon system',
+                    'Multi-language support',
+                    'Payment integration',
+                    'Weather-aware scheduling',
+                    'Guest gallery submissions'
+                ],
+                stack: ['React', 'Next.js', 'Mapbox', 'Framer Motion', 'Stripe']
+            },
+            {
+                id: 'cattle-company',
+                title: 'Charcol Creek Cattle Co.',
+                category: 'AGRICULTURAL TECH',
+                filter: 'web',
+                badge: 'BRANDING',
+                icon: '🐄',
+                viz: 'viz-8',
+                shortDesc: 'A rustic yet modern web presence for a premium cattle ranch, combining agricultural heritage with contemporary web standards.',
+                fullDesc: 'A brand and web platform for a heritage cattle ranch. Balances a rustic visual aesthetic with modern e-commerce for beef sales, ranch tours, and livestock listings. Features a farm-to-table story-driven layout and integrated payment for direct beef orders.',
+                features: [
+                    'Farm-to-table story layout',
+                    'Direct beef ordering',
+                    'Livestock catalog',
+                    'Ranch tour booking',
+                    'Seasonal product releases',
+                    'Newsletter with recipes',
+                    'Custom brand illustrations',
+                    'Delivery zone mapping'
+                ],
+                stack: ['WordPress', 'WooCommerce', 'PHP', 'Custom Theme', 'jQuery']
+            },
+            {
+                id: 'chat-app',
+                title: 'Real-Time Chat Application',
+                category: 'FULL-STACK / REAL-TIME',
+                filter: 'fullstack',
+                badge: 'REAL-TIME',
+                icon: '💬',
+                viz: 'viz-2',
+                shortDesc: 'A real-time messaging application with private rooms, group chats, media sharing, and typing indicators built with Socket.io and Node.js.',
+                fullDesc: 'A modern chat platform supporting one-on-one and group conversations with real-time messaging via WebSocket. Features include message read receipts, typing indicators, media/file sharing, voice notes, and end-to-end encryption for private rooms. Built with performance in mind — handles hundreds of concurrent connections smoothly.',
+                features: [
+                    'Real-time messaging with Socket.io',
+                    'Private &amp; group chat rooms',
+                    'Read receipts &amp; typing indicators',
+                    'Image, video, and file sharing',
+                    'Voice notes recording',
+                    'End-to-end encrypted rooms',
+                    'Message search &amp; history',
+                    'Online presence tracking'
+                ],
+                stack: ['Node.js', 'Socket.io', 'Express', 'MongoDB', 'React', 'JWT']
+            },
+            {
+                id: 'school-management',
+                title: 'School Management System',
+                category: 'ENTERPRISE / EDUCATION',
+                filter: 'fullstack',
+                badge: 'SPRING BOOT',
+                icon: '🎓',
+                viz: 'viz-3',
+                shortDesc: 'A comprehensive Spring Boot-based platform for school administration — student records, grades, attendance, timetables, and parent portals in one unified system.',
+                fullDesc: 'An enterprise-grade school management system built with Spring Boot and Angular. Serves administrators, teachers, students, and parents through role-based portals. Handles student enrollment, attendance tracking, grade entry, exam scheduling, fee management, and automated parent notifications. Deployed in multiple Kenyan secondary schools.',
+                features: [
+                    'Role-based portals (4 user types)',
+                    'Digital attendance tracking',
+                    'Grade entry &amp; report cards',
+                    'Fee payment tracking',
+                    'Parent SMS notifications',
+                    'Timetable management',
+                    'Exam scheduling',
+                    'Analytics dashboard'
+                ],
+                stack: ['Spring Boot', 'Angular', 'MySQL', 'JWT', 'Twilio', 'Docker']
+            },
+            {
+                id: 'ai-chatbot',
+                title: 'AI Customer Service Chatbot',
+                category: 'AI / NLP',
+                filter: 'ai',
+                badge: 'AI',
+                icon: '🤖',
+                viz: 'viz-1',
+                shortDesc: 'An LLM-powered customer service assistant that handles queries, escalates to humans when needed, and integrates with existing help desk systems.',
+                fullDesc: 'A production-ready customer service chatbot leveraging OpenAI\'s API with retrieval-augmented generation (RAG) over the company knowledge base. Automatically resolves common queries, hands off complex issues to human agents with full context, and continuously learns from resolved tickets.',
+                features: [
+                    'GPT-powered natural conversations',
+                    'RAG over knowledge base',
+                    'Multi-language support',
+                    'Human agent handoff',
+                    'Ticket resolution tracking',
+                    'Sentiment analysis',
+                    'Analytics dashboard',
+                    'Custom persona training'
+                ],
+                stack: ['Python', 'OpenAI API', 'LangChain', 'ChromaDB', 'FastAPI', 'React']
+            },
+            {
+                id: 'restaurant-platform',
+                title: 'Restaurant Ordering Platform',
+                category: 'FULL-STACK / FOOD-TECH',
+                filter: 'fullstack',
+                badge: 'FOOD-TECH',
+                icon: '🍽️',
+                viz: 'viz-5',
+                shortDesc: 'A three-sided platform connecting diners, restaurants, and delivery riders — with real-time order tracking, digital menus, and M-Pesa payments.',
+                fullDesc: 'A comprehensive food ordering &amp; delivery platform serving three user types: diners (mobile app), restaurants (dashboard), and delivery riders (mobile app). Handles the full order lifecycle from cart to doorstep with live GPS tracking, dynamic pricing during peak hours, and M-Pesa integration.',
+                features: [
+                    'Diner mobile app',
+                    'Restaurant admin dashboard',
+                    'Rider tracking app',
+                    'Live GPS order tracking',
+                    'M-Pesa payment integration',
+                    'Dynamic peak-hour pricing',
+                    'Rating &amp; review system',
+                    'Promo codes &amp; loyalty'
+                ],
+                stack: ['React Native', 'Node.js', 'PostgreSQL', 'Redis', 'M-Pesa API', 'Google Maps']
+            },
+            {
+                id: 'task-management',
+                title: 'Task Management Suite',
+                category: 'PRODUCTIVITY / SAAS',
+                filter: 'fullstack',
+                badge: 'SAAS',
+                icon: '✅',
+                viz: 'viz-6',
+                shortDesc: 'A team collaboration platform with kanban boards, sprint planning, time tracking, and reporting — think Trello meets Jira, built for small teams.',
+                fullDesc: 'A team collaboration and project management SaaS built for startups and small teams. Combines kanban-style task boards, sprint planning, time tracking, workload balancing, and a clean reporting dashboard. Offers Slack-style real-time updates and a customizable workflow engine.',
+                features: [
+                    'Drag-and-drop kanban boards',
+                    'Sprint planning &amp; velocity tracking',
+                    'Time tracking per task',
+                    'Custom workflow engine',
+                    'Real-time collaboration',
+                    'File attachments &amp; comments',
+                    'Reporting &amp; analytics',
+                    'Slack &amp; email integrations'
+                ],
+                stack: ['React', 'Redux', 'Node.js', 'PostgreSQL', 'Socket.io', 'AWS S3']
+            },
+            {
+                id: 'weather-dashboard',
+                title: 'Weather Forecast Dashboard',
+                category: 'DATA VISUALIZATION',
+                filter: 'web',
+                badge: 'API',
+                icon: '🌦️',
+                viz: 'viz-7',
+                shortDesc: 'A beautifully-designed weather dashboard with 7-day forecasts, hourly breakdowns, air quality index, and location-based alerts for African cities.',
+                fullDesc: 'A weather visualization dashboard focused on East African cities, combining multiple weather APIs into a single unified experience. Features include hyper-local forecasts, air quality monitoring, agricultural weather advice for farmers, and severe weather push alerts.',
+                features: [
+                    '7-day &amp; hourly forecasts',
+                    'Air quality index',
+                    'Rainfall probability charts',
+                    'Agricultural weather advisories',
+                    'Severe weather alerts',
+                    'Multi-city comparison',
+                    'Historical weather data',
+                    'Location auto-detect'
+                ],
+                stack: ['React', 'Chart.js', 'OpenWeather API', 'Node.js', 'Tailwind CSS']
+            }
+        ];
+
+        // ===== RENDER PROJECTS =====
+        const grid = document.getElementById('projectsGrid');
+
+        function renderProjects(filter = 'all') {
+            grid.innerHTML = '';
+            projects.forEach((p, i) => {
+                const isVisible = filter === 'all' || p.filter === filter;
+                if (!isVisible) return;
+
+                const card = document.createElement('div');
+                card.className = 'project-card fade-up';
+                card.dataset.projectId = p.id;
+                card.innerHTML = `
+                    <div class="project-visual ${p.viz}">
+                        <span class="project-badge-tl">${p.badge}</span>
+                        <div class="project-icon">${p.icon}</div>
+                    </div>
+                    <div class="project-content">
+                        <p class="project-category">${p.category}</p>
+                        <h3 class="project-title">${p.title}</h3>
+                        <p class="project-description">${p.shortDesc}</p>
+                        <div class="project-footer">
+                            <div class="project-tags">
+                                ${p.stack.slice(0, 3).map(t => `<span class="project-tag">${t}</span>`).join('')}
+                            </div>
+                            <span class="project-link">View →</span>
+                        </div>
+                    </div>
+                `;
+                card.addEventListener('click', () => openModal(p.id));
+                grid.appendChild(card);
+                // trigger animation
+                setTimeout(() => card.classList.add('visible'), 30 * i);
+            });
+        }
+
+        // ===== FILTER =====
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                renderProjects(btn.dataset.filter);
+            });
+        });
+
+        // ===== MODAL =====
+        function openModal(projectId) {
+            const p = projects.find(x => x.id === projectId);
+            if (!p) return;
+
+            document.getElementById('modalCategory').textContent = p.category;
+            document.getElementById('modalTitle').innerHTML = p.title;
+            document.getElementById('modalDescription').innerHTML = p.fullDesc;
+
+            const featuresEl = document.getElementById('modalFeatures');
+            featuresEl.innerHTML = p.features.map(f => `<li>${f}</li>`).join('');
+
+            const stackEl = document.getElementById('modalStack');
+            stackEl.innerHTML = p.stack.map(t => `<span>${t}</span>`).join('');
+
+            document.getElementById('modalOverlay').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('modalOverlay').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function closeModalIfOverlay(e) {
+            if (e.target.id === 'modalOverlay') closeModal();
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        // ===== NAVBAR SCROLL =====
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            navbar.classList.toggle('scrolled', window.scrollY > 40);
+        });
+
+        // ===== FADE-UP ANIMATION =====
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) e.target.classList.add('visible');
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+        document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
+
+        // ===== SMOOTH SCROLL =====
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href === '#' || href === '') return;
+                const target = document.querySelector(href);
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // ===== MOBILE MENU (basic) =====
+        function toggleMobileMenu() {
+            const links = document.querySelector('.nav-links');
+            if (links.style.display === 'flex') {
+                links.style.display = '';
+            } else {
+                links.style.display = 'flex';
+                links.style.flexDirection = 'column';
+                links.style.position = 'absolute';
+                links.style.top = '100%';
+                links.style.right = '5%';
+                links.style.background = 'var(--card)';
+                links.style.padding = '1rem';
+                links.style.borderRadius = '10px';
+                links.style.border = '1px solid var(--border)';
+                links.style.gap = '1rem';
+            }
+        }
+
+        // ===== INITIAL RENDER =====
+        renderProjects('all');
+        // Ensure new cards trigger fade-up on scroll after filter change
+        setTimeout(() => {
+            document.querySelectorAll('.project-card.fade-up').forEach(el => io.observe(el));
+        }, 100);
+    </script>
+</body>
+</html>
